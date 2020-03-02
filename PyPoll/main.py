@@ -8,10 +8,9 @@ with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
 
     csvheader = next(csvreader)
-    print(f"CSV Header: {csvheader}")
-
+    
     total_votes = 0
-    candidate_list = []
+    #candidate_list = []
     each_candidate = set()
     li_votes = 0
     li_percent = 0
@@ -22,15 +21,16 @@ with open(csvpath) as csvfile:
     otooley_votes = 0
     otooley_percent = 0
     
-
+    
     for row in csvreader:
         
-        total_votes += 1 
-        print(total_votes)
-        
+        #total number of votes cast
+        total_votes += 1  
+  
+        #complete list of candidates who received votes
         each_candidate.add(row[2])
         new_candidate_list = list(each_candidate)
-        print(new_candidate_list)
+        
 
         if row[2] == "Li":
             li_votes += 1
@@ -41,31 +41,46 @@ with open(csvpath) as csvfile:
         elif row[2] == "O'Tooley":
             otooley_votes += 1
             
-        #li_percent = (li_votes / total_votes) * 100
-        #khan_percent = (khan_votes / total_votes) * 100
-        #correy_percent = (correy_votes / total_votes) * 100
-        #otooley_percent = (otooley_votes/ total_votes) * 100
+        li_percent = round((li_votes / total_votes) * 100, 2)
+        khan_percent = round((khan_votes / total_votes) * 100, 2)
+        correy_percent = round((correy_votes / total_votes) * 100, 2)
+        otooley_percent = round((otooley_votes/ total_votes) * 100, 2)
 
+    
+
+    candidates = {
+        "Name" : ["Li", "Khan", "Correy", "O'Tooley"],
+        "Percentage of Votes" : [li_percent, khan_percent, correy_percent, otooley_percent],
+        "Total Number of Votes" : [li_votes, khan_votes, correy_votes, otooley_votes]
+    }
+    
+
+    #adding number of votes for each candidate into a list
     votes_bycandidates = []
     votes_bycandidates.append(li_votes)
     votes_bycandidates.append(khan_votes)
     votes_bycandidates.append(correy_votes)
     votes_bycandidates.append(otooley_votes)
 
+    #sorting the list in ascending order to find out the highest number of votes
     votes_bycandidates.sort()
     print(votes_bycandidates)
-    #print(f"Winner is: ", votes_bycandidates[-1])
+    print(f"Winner is: ", votes_bycandidates[-1])
     
     
-    
+    ############ A N A L Y S I S #################
+    print("Election Results \n--------------------------")
+    print(f"Total votes: {total_votes} \n--------------------------")
+    #print(f"Khan: {candidates["Percentage of Votes"][2]} ({candidates["Total Number of Votes"][2]})") 
+    print("Khan: {}% ({})".format(candidates["Percentage of Votes"][1], candidates["Total Number of Votes"][1])) 
+    print("Correy: {}% ({})".format(candidates["Percentage of Votes"][2], candidates["Total Number of Votes"][2])) 
+    print("Li: {}% ({})".format(candidates["Percentage of Votes"][0], candidates["Total Number of Votes"][0])) 
+    print("O'Tooley: {}% ({})".format(candidates["Percentage of Votes"][3], candidates["Total Number of Votes"][3]))
+    print("--------------------------") 
 
-
-    #print(f" Number of Li's votes: {li_votes}")
-    #print(f" Number of Khans's votes: {khan_votes}")
-    #print(f" Number of Correy's votes: {correy_votes}")
-    #print(f" Number of O'Tooley's votes: {otooley_votes}")
-    #print(votes_bycandidates)
-    #print(li_percent)
+    
+    
+   
 
 
  
