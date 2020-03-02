@@ -1,4 +1,4 @@
-  import os
+import os
 import csv
 
 csvpath = os.path.join('..', 'PyBank', 'budget_data.csv')
@@ -6,10 +6,10 @@ csvpath = os.path.join('..', 'PyBank', 'budget_data.csv')
 with open(csvpath) as csvfile:
 
     csvreader = csv.reader(csvfile, delimiter = ',')
-    print(csvreader)
+    #print(csvreader)
 
     csvheader = next(csvreader)
-    print(f" CSV Header: {csvheader}")
+    #print(f" CSV Header: {csvheader}")
 
     total_month = 0
     net_total = 0
@@ -31,18 +31,25 @@ with open(csvpath) as csvfile:
     max_dec_date = None
 
     for i in range(1, len(profit_loss_list)):
+        
         diff = profit_loss_list[i][1] - profit_loss_list[i - 1][1]
+        
         if diff > max_inc_val:
             max_inc_val = diff
             max_inc_date = profit_loss_list[i][0]
         if diff < max_dec_val:
             max_dec_val = diff
             max_dec_date = profit_loss_list[i][0]
+        
         diff_sum += diff
+        
         average_change = round((diff_sum / (len(profit_loss_list) - 1)), 2)
     
+    #print(profit_loss_list[1]) #row/first item or tuple in list
+    #print(profit_loss_list[3][1]) #row 3, 1st column
+    #print(profit_loss_list[3][0]) #row 3, zero column
     
-
+    ################ A N A L Y S I S ########################
     print("Financial Analysis \n---------------------------")
     print(f"Total Months: {total_month}")
     print(f"Total: ${net_total}")
