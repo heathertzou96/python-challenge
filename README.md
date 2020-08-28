@@ -11,7 +11,7 @@
 # PyPoll Project
 
 ### Task
-* Modernizing the vote-counting process by analyzing the votes in a small, rural town using Python and calculating the following:
+* Modernizing the vote-counting process by analyzing the votes (election_data.csv) in a small, rural town using Python and calculating the following:
   * The total number of votes cast
   * A complete list of candidates who received votes
   * The percentage of votes each candidate won
